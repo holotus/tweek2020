@@ -18,6 +18,9 @@ import {
 } from '../helpers'
 import WishlistButton from '@components/wishlist/WishlistButton'
 
+import { SegmentHelper } from '@components/SegmentHelper'
+import { useEffect } from 'react';
+
 interface Props {
   className?: string
   children?: any
@@ -25,6 +28,11 @@ interface Props {
 }
 
 const ProductView: FC<Props> = ({ product }) => {
+  
+  useEffect(() => {
+    SegmentHelper.ProductViewed(product.entityId, product.prices?.price.value, product.name, "unknown");
+  }, [])
+
   const addItem = useAddItem()
   const { price } = usePrice({
     amount: product.prices?.price?.value,
@@ -42,7 +50,10 @@ const ProductView: FC<Props> = ({ product }) => {
     getCurrentVariant(product, choices) || product.variants.edges?.[0]
 
   const addToCart = async () => {
-    setLoading(true)
+    setLoading(true);
+
+    SegmentHelper.ProductAddedToCart(product.entityId, product.prices?.price.value, product.name, "unknown", product.variants.edges?.[0]?.node.entityId!);
+
     try {
       await addItem({
         productId: product.entityId,
