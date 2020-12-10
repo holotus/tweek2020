@@ -3,7 +3,7 @@ import Link from 'next/link'
 import cn from 'classnames'
 import useCart from '@bigcommerce/storefront-data-hooks/cart/use-cart'
 import useCustomer from '@bigcommerce/storefront-data-hooks/use-customer'
-import { Heart, Bag } from '@components/icons'
+import { Heart, Bag, WhatsApp } from '@components/icons'
 import { useUI } from '@components/ui/context'
 import DropdownMenu from './DropdownMenu'
 import s from './UserNav.module.css'
@@ -21,12 +21,18 @@ const UserNav: FC<Props> = ({ className, children, ...props }) => {
   const { data } = useCart()
   const { data: customer } = useCustomer()
   const { toggleSidebar, closeSidebarIfPresent, openModal } = useUI()
+  const { setModalView, closeModal } = useUI()
+
   const itemsCount = Object.values(data?.line_items ?? {}).reduce(countItems, 0)
 
   return (
     <nav className={cn(s.root, className)}>
       <div className={s.mainContainer}>
         <ul className={s.list}>
+
+          <li className={s.item} onClick={() => {setModalView('CONTACT_VIEW'); openModal()}}>
+            <WhatsApp />
+          </li>
           <li className={s.item} onClick={toggleSidebar}>
             <Bag />
             {itemsCount > 0 && <span className={s.bagCount}>{itemsCount}</span>}

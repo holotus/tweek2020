@@ -1,4 +1,12 @@
 export class SegmentHelper {
+
+    static PhoneIdentified = (phone:string) => {
+        (window as { [key: string]: any })["analytics"].identify({
+            phone:phone
+          });
+    }
+
+
     static ProductViewed = (product_id:Number, product_value:number, product_name:string, product_department:string) => {
         (window as { [key: string]: any })["analytics"].track("Product Viewed", {
             product_id: product_id,

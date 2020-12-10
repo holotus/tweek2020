@@ -34,6 +34,10 @@ const ForgotPassword = dynamic(
   () => import('@components/auth/ForgotPassword'),
   dynamicProps
 )
+const ContactUs = dynamic(
+  () => import('@components/auth/ContactUs'),
+  dynamicProps
+)
 const FeatureBar = dynamic(
   () => import('@components/common/FeatureBar'),
   dynamicProps
@@ -71,6 +75,7 @@ const Layout: FC<Props> = ({ children, pageProps }) => {
           {modalView === 'LOGIN_VIEW' && <LoginView />}
           {modalView === 'SIGNUP_VIEW' && <SignUpView />}
           {modalView === 'FORGOT_VIEW' && <ForgotPassword />}
+          {modalView === 'CONTACT_VIEW' && <ContactUs />}
         </Modal>
 
         <FeatureBar
