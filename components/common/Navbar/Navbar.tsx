@@ -37,8 +37,8 @@ const Navbar: FC = () => {
               <Link href="/search">
                 <a className={s.link}>All</a>
               </Link>
-              <Link href="/search?q=clothes">
-                <a className={s.link}>Clothes</a>
+              <Link href="/search?q=ipa">
+                <a className={s.link}>IPA</a>
               </Link>
               <Link href="/search?q=accessories">
                 <a className={s.link}>Accessories</a>
